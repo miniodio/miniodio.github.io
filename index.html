@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNS Profile</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <div class="banner bg-white shadow-sm rounded"> <!--상단 프로필 배너-->
+            <div class="banner-container d-flex flex-column flex-md-row justify-content-between align-items-center"> <!--마진들어간 배너 내부 컨텐츠 영역-->
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="banner-photo rounded-circle overflow-hidden object-fit-cover">
+                        <img src="img/chef1.jpg">
+                    </div>
+                    <div class="ms-4">
+                        <p class="fw-bolder fs-3">BBA-SSU Baik</p>
+                        <p class="fst-lighter">TheBorn Korea. CEO. Chef.</p>
+                        <p class="mt-1 fw-normal fs-6 text-color-blue"><i class="fa-solid fa-location-dot me-2"></i>서울시 강남구</p>
+                        <button type="button" class="mt-2 btn btn-primary">Contact</button>
+                    </div>
+                </div>
+                <div class="flex-grow-1"></div>
+                <div class="grey-box"></div>
+                <div class="mt-4 mt-md-0">
+                    <table class="table-banner ms-4">
+                        <tr>
+                            <td>Location</td>
+                            <td>서울 마포구</td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td>90년생</td>
+                        </tr>
+                        <tr>
+                            <td>Experience</td>
+                            <td>신입</td>
+                        </tr>
+                        <tr>
+                            <td>Education</td>
+                            <td>스트리트푸드파이터</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div> <!--하단세부내용페이지-->
+            <div class="nav-tab-container"> <!--상단 네비게이터-->
+                <table class="table-nav">
+                    <tr>
+                        <td><a href="#" class="text-color-blue">Profile</a></td>
+                        <td><a href="#">Link</a></td>
+                        <td><a href="#">Link</a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-container d-flex flex-column flex-md-row"> <!--하단 카드 영역-->
+                <div class="card card-size bg-white shadow-sm rounded h-75 p-4"> <!--하단좌측 WORKS-->
+                    <h5 class="card-title">WORKS</h5>
+                    <ul>
+                        <li><p class="card-text">Landing page design</p></li>
+                        <li><p class="card-text">Flyer design</p></li>
+                        <li><p class="card-text">Vue.js To-do app</p></li>
+                        <li><p class="card-text">Shopping page design</p></li>
+                    </ul>
+                </div>
+                <div class="card card-size bg-white shadow-sm rounded p-4 mt-3 mb-3 mt-md-0 mb-md-0 ms-md-3 me-md-3 flex-grow-1"> <!--하단중앙 ABOUT-->
+                    <h5 class="card-title">ABOUT</h5>
+                    <p class="card-text">I am a front-end designer who is excellent at Bootstrap, Sass, Foundation. I have dealt lots of in-house design works and outsource things. If you want to check my portfolio, please visit Killanseven.com</p>
+                    <div class="grey-box-v mt-4"></div>
+                    <div class="d-flex mt-4 justify-content-between"> <!--SKILLS 아이콘 사용할것-->
+                        <div class="icon-circle">
+                            <i class="fa-brands fa-html5"></i>
+                        </div>
+                        <div class="icon-circle">
+                            <i class="fa-brands fa-js"></i>
+                        </div>
+                        <div class="icon-circle">
+                            <i class="fa-brands fa-css3"></i>
+                        </div>
+                        <div class="icon-circle">
+                            <i class="fa-solid fa-vector-square"></i>
+                        </div>
+                        <div class="icon-circle">
+                            <i class="fa-regular fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="grey-box-v mt-4"></div>
+                    <div class="d-flex mt-4 flex-wrap"> <!--SKILLS 아이콘 사용할것-->
+                        <div class="text-circle">
+                            <p>HTML</p>
+                        </div>
+                        <div class="text-circle">
+                            <p>JavaScript</p>
+                        </div>
+                        <div class="text-circle">
+                            <p>CSS3</p>
+                        </div>
+                        <div class="text-circle">
+                            <p>Illustrator</p>
+                        </div>
+                        <div class="text-circle">
+                            <p>Photoshop</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-size">
+                    <div class="card bg-white shadow-sm rounded p-4 flex-column align-items-center text-center"> <!--SIGN UP-->
+                        <h1 class="text-color-blue"><i class="fa-solid fa-fire-flame-simple"></i></h1>
+                        <p class="card-text">Find me at Linkedout.com</p>
+                        <button type="button" class="mt-3 btn btn-primary">Sign Up</button>
+                        <p class="mt-2"><a class="text-color-blue" href="#">Already a member?</a></p>                    
+                    </div>    
+                    <div class="mt-4 ps-2 pe-2"> <!--SUGGEST-->
+                        <p class="fs-6 fw-bold text-center">People You Might Know</p>
+                        <div class="grey-box-v mt-3"></div>
+                        <div class="d-flex mt-3">
+                            <div class="small-photo rounded-circle overflow-hidden object-fit-cover">
+                                <img src="img/chef1.jpg">
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <p class="fw-bolder">BBA-SSU Baik</p>
+                                <p class="fst-lighter">TheBorn Korea</p>
+                                <p class="mt-1 fw-normal text-color-blue"><i class="fa-solid fa-location-dot me-2"></i>서울시 강남구</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-3">
+                            <div class="small-photo rounded-circle overflow-hidden object-fit-cover">
+                                <img src="img/chef1.jpg">
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <p class="fw-bolder">BBA-SSU Baik</p>
+                                <p class="fst-lighter">TheBorn Korea</p>
+                                <p class="mt-1 fw-normal text-color-blue"><i class="fa-solid fa-location-dot me-2"></i>서울시 강남구</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
