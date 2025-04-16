@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta title="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+    <title>Document</title>
+
+    <script src="jquety-3.7.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div></div>
+
+    <script>
+        const selectedItem = JSON.parse(localStorage.getItem('cart'))
+        
+        if (selectedItem == null) {
+            $('div').append('<p>장바구니가 비었어욤</p>')
+        } else {
+            for (var i = 0; i < selectedItem.length; i++){
+                $('div').append(`<p>${selectedItem[i].title}  ${selectedItem[i].num}개 선택하였습니다</p>`)  
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>

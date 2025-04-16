@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta title="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+  <link href="font-awsome/css/all.min.css" rel="stylesheet">
+  <link href="main2.css" rel="stylesheet">
+  <title>Document</title>
+
+  <script src="jquety-3.7.1.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container d-flex justify-content-center mt-3 mb-3">
+    <div class="carusel-container">
+      <div class="carusel-box">
+        <img class="carusel-item" src="_img/img1.webp">
+        <img class="carusel-item" src="_img/img2.jpeg">
+        <img class="carusel-item" src="_img/img3.webp">
+      </div>
+      <button class="mx-3"><span><i class="fa-solid fa-chevron-left"></i></span></button>
+      <button class="end-0 me-3"><span><i class="fa-solid fa-chevron-right"></i></span></button>
+      <div class="carusel-indicator-container">
+        <!-- <div class="carusel-indicator"></div>
+        <div class="carusel-indicator"></div>
+        <div class="carusel-indicator"></div> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <select class="form-select w-25" aria-label="Default select example">
+      <option selected>정렬없음</option>
+      <option value="1">금액오름차순</option>
+      <option value="2">금액내림차순</option>
+      <option value="3">가나다</option>
+      <option value="4">가나다 역순</option>
+    </select>
+
+    <div id="price-filter" class="input-group ms-5 w-25">
+      <ul class="dropdown-menu end-0">
+        <li><a class="dropdown-item" href="#">이하만</a></li>
+        <li><a class="dropdown-item" href="#">이상만</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">원래대로</a></li>
+      </ul>
+      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">금액필터</button>
+    </div>
+  </div>
+
+  <div class="container w-75 d-flex flex-column align-items-center mt-3 mb-1">
+    <!-- <div class="card w-75 mb-3">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <h5 class="card-title mt-1 flex-grow-1">제품명</h5>
+        <p class="card-text float-start">60000</p>
+        <input type="number" value="1" placeholder="1">
+        <a href="#" class="btn btn-primary">Cart</a>
+      </div>
+    </div> -->
+  </div>
+  <div class="container d-flex justify-content-center">
+    <button id="btn-load" class="btn btn-primary me-5">더보기</button>
+    <a href="cart2.html"><button id="btn-link-cart" class="btn btn-success ms-5">카트바로가기</button></a>
+    <button id="btn-cart-reset" class="btn btn-danger ms-2">카트비우기</button>
+    
+  </div>
+
+  
+
+
+
+  <script>
+    //카루셀 좌우 인디케이터 : 움직이기
+    const caruselLeft = document.querySelectorAll('button')[0];
+    const caruselRight = document.querySelectorAll('button')[1];
+
+    const caruselBox = document.querySelector('.carusel-box');
+    const caruselItem = document.querySelectorAll('.carusel-item');
+
+    var itemPageNow = 0;
+
+    caruselRight.addEventListener('click', function () {
+      for (var i = 0; i < caruselItem.length - 1; i++) {
+        if (itemPageNow == i) {
+          caruselBox.style.left = `-${400 * (i + 1)}px`;
+          itemPageNow++;
+          caruselIndicatorReset();
+          return;
+        }
+      }
+    })
+
+    caruselLeft.addEventListener('click', function () {
+      for (var i = 1; i < caruselItem.length; i++) {
+        if (itemPageNow == i) {
+          caruselBox.style.left = `-${400 * (i - 1)}px`;
+          itemPageNow--;
+          caruselIndicatorReset();
+          return;
+        }
+      }
+    })
+
+    //카루셀 하단 인디케이터 : 생성
+    const caruselIndicatorContainer = document.querySelector('.carusel-indicator-container')
+    var 인디케이터템플릿 = `<div class="carusel-indicator"></div>`
+
+    for (var i = 0; i < caruselItem.length; i++) {
+      caruselIndicatorContainer.insertAdjacentHTML('beforeend', 인디케이터템플릿);
+    }
+
+    //카루셀 하단 인디케이터 : 움직이기
+    const caruselIndicator = document.querySelectorAll('.carusel-indicator')
+    caruselIndicator[0].style.opacity = '1';
+
+    caruselIndicatorContainer.addEventListener('click', function (e) {
+      for (var i = 0; i < caruselItem.length; i++) {
+        if (e.target == caruselIndicator[i]) {
+          itemPageNow = i;
+          caruselBox.style.left = `-${400 * (i)}px`;
+        }
+      }
+      caruselIndicatorReset()
+    })
+
+    //카루셀 하단 인디케이터 : 색상 초기화
+    function caruselIndicatorReset() {
+      for (var i = 0; i < caruselItem.length; i++) {
+        caruselIndicator[i].style.opacity = '0.5';
+      }
+      caruselIndicator[itemPageNow].style.opacity = '1';
+    }
+
+    //제품 리스트 : 초기 생성
+    //금액 필터
+    const priceFilterDropdown = document.querySelector('#price-filter button');
+    const priceFilterDropdownMenu = document.querySelector('#price-filter ul');
+    const priceFilterDropdownItem = document.querySelectorAll('.dropdown-item');
+    const priceFilterInput = document.querySelector('#price-filter input');
+    var filteredItemList;
+
+    var filterNow = 'none';
+
+    document.addEventListener('click', function (e) {
+      priceFilterDropdownMenu.classList.remove('show')
+      if (e.target == priceFilterDropdown) {
+        priceFilterDropdownMenu.classList.add('show')
+      }
+    })
+
+    priceFilterDropdownItem[0].addEventListener('click', function (e) {
+      priceFilterDropdown.innerHTML = this.innerHTML;
+      filteredItemList = itemList.filter((a) => a.price < priceFilterInput.value);
+      filterNow = 'down';
+      makeItemList(filteredItemList);
+    })
+
+    priceFilterDropdownItem[1].addEventListener('click', function (e) {
+      priceFilterDropdown.innerHTML = this.innerHTML;
+      filteredItemList = itemList.filter((a) => a.price > priceFilterInput.value);
+      filterNow = 'up';
+      makeItemList(filteredItemList);
+    })
+
+    priceFilterDropdownItem[2].addEventListener('click', function (e) {
+      priceFilterDropdown.innerHTML = this.innerHTML;
+      filteredItemList = itemList
+      filterNow = 'none';
+      makeItemList(itemList);
+    })
+
+    var itemList = [
+      { 'title': '복실이 파우더', 'price': 3000 },
+      { 'title': '고구마', 'price': 8000 },
+      { 'title': '당근장난감', 'price': 12000 }]
+
+    const itemListContainer = document.querySelectorAll('.container')[1]
+
+    function makeItemList(targetArray) {
+      itemListContainer.innerHTML = '';
+      for (var i = 0; i < targetArray.length; i++) {
+        itemListContainer.insertAdjacentHTML('beforeend',
+          `<div class="card w-75 mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <h5 class="card-title mt-1 flex-grow-1">${targetArray[i].title}</h5>
+          <p class="card-text float-start">${targetArray[i].price}</p>
+          <input type="number" value="1" placeholder="1">
+          <a id="btn-cart" href="#" class="btn btn-primary">Cart</a>
+        </div>
+        </div>`);
+      }
+    }
+
+    makeItemList(itemList);
+
+    //ajax DB 불러오기 + 불러온 아이템으로 박스만들기
+    const btnLoad = document.getElementById('btn-load')
+    var loadCount = 1;
+
+    btnLoad.addEventListener('click', function () {
+      if (loadCount == 2) {
+        btnLoad.style.display = 'none';
+      }
+      $.get(`https://codingapple1.github.io/js/more${loadCount}.json`).done(function (data) {
+        loadCount++;
+        for (var i = 0; i < data.length; i++) {
+          itemList.push(data[i]);
+        }
+        makeItemList(itemList);
+      }).fail(function () {
+        alert('불러오는데 뭔가 에러가 생겼어요')
+      })
+
+    })
+
+    //정렬하기
+    const btnSort = document.querySelectorAll('select')
+
+    btnSort[0].addEventListener('change', function () {
+      if (this.value == 1) {                             //////오름차순
+        itemList.sort((a, b) => { return a.price - b.price });
+        makeItemList(itemList);
+      } else if (this.value == 2) {                    ////////내림차순
+        itemList.sort((a, b) => { return b.price - a.price });
+        makeItemList(itemList);
+      } else if (this.value == 3) {                    ////////글자오름차순
+        itemList.sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase() ? 1 : -1);
+        makeItemList(itemList);
+      } else if (this.value == 4) {                    ////////글자내림차순
+        itemList.sort((a, b) => a.title.toUpperCase() < b.title.toUpperCase() ? 1 : -1);
+        makeItemList(itemList);
+      }
+    });
+
+    //카트에 넣기
+
+    document.querySelectorAll('div.container')[1].addEventListener('click', function (e) {
+      var btnCart = document.querySelectorAll('#btn-cart');
+
+      var targetTitle;
+      var targetNum;
+
+      var preStorage = JSON.parse(localStorage.getItem('cart'))
+
+      for (var i = 0; i < btnCart.length; i++) {
+
+        if (e.target == btnCart[i]) {
+          targetTitle = btnCart[i].previousElementSibling.previousElementSibling.previousElementSibling.innerHTML;
+          targetNum = btnCart[i].previousElementSibling.value;
+
+
+          if (localStorage.getItem('cart') == null) {
+            localStorage.setItem('cart', JSON.stringify([{ 'title': targetTitle, 'num': targetNum }]));
+          } else {
+
+
+            for (var i = 0; i < preStorage.length; i++) {
+              if (targetTitle == preStorage[i].title) {
+                /* console.log(targetTitle + ':' + targetNum)
+                console.log(targetTitle + ':' + preStorage[i].num) */
+                preStorage[i].num = parseInt(preStorage[i].num) + parseInt(targetNum);
+                localStorage.setItem('cart', JSON.stringify(preStorage))
+                return;
+              }
+            }
+            preStorage[preStorage.length] = { 'title': targetTitle, 'num': targetNum };
+            localStorage.setItem('cart', JSON.stringify(preStorage))
+          }
+          return;
+        }
+        e.preventDefault();
+      }
+    })
+
+    //카트 초기화
+    const btnCartReset = document.getElementById('btn-cart-reset')
+
+    btnCartReset.addEventListener('click', function () {
+      localStorage.clear('cart')
+    })
+
+
+  </script>
+
+
+
+</body>
+
+</html>
