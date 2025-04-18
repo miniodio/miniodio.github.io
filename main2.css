@@ -1,0 +1,71 @@
+div {
+    box-sizing: border-box;
+}
+
+h5, p {
+    margin: 0;
+    line-height: 0;
+}
+
+.carusel-container {
+    width: 400px;
+    background-color: #eee;
+    overflow: hidden;
+    position: relative;
+}
+
+.carusel-box {
+    width: 1200px;
+    display: flex;
+    position: relative;
+    left : 0;
+    transition: all 0.5s;
+}
+
+.carusel-box img {
+    width: 400px;
+}
+
+.carusel-container button {
+    position: absolute;
+    color: white;
+    opacity: 0.5;
+    top: 125px;
+    font-size: 30px;
+    background : none;
+    border: none;
+}
+
+.carusel-indicator-container {
+    position: absolute;
+    width: 200px;
+    height: 5px;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.carusel-indicator {
+    width : 60px;
+    height: 5px;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.5;
+    margin: 3px;
+}
+
+.card-body p{
+    margin-right: 50px;
+}
+.card-body input{
+    width: 50px;
+    margin-right: 50px;
+}
+
+.show {
+    display: block;
+}
